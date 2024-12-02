@@ -1,0 +1,6 @@
+@B3_CBD_Challenger.Server_HostAddress = http://localhost:5217
+
+GET {{B3_CBD_Challenger.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
