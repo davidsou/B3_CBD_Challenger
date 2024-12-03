@@ -5,14 +5,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Configurar CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowSpecificOrigins", policy =>
+    options.AddPolicy("AllowAnyOrigins", policy =>
     {
-        //policy.WithOrigins("https://localhost:4200") // Permite a origem do Angular
-        //      .AllowAnyHeader()
-        //      .AllowAnyMethod();
         policy.AllowAnyOrigin()
-            .AllowAnyHeader()
-            .AllowAnyMethod();
+              .AllowAnyMethod()
+              .AllowAnyHeader();
     });
 });
 
@@ -28,11 +25,11 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Ativar CORS
-app.UseCors();
+
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -40,8 +37,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseRouting();
 app.UseHttpsRedirection();
+// Ativar CORS
+app.UseCors("AllowAnyOrigins");
 
 app.UseAuthorization();
 

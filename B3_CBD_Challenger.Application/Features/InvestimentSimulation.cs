@@ -30,7 +30,7 @@ public class InvestimentSimulation
                 finalValue *= 1 + (CDI * TB);
             }
 
-            return finalValue;
+            return Math.Round(finalValue,2);
         }
 
         public (decimal netValue, decimal appliedTax) ApplyTax(decimal finalValue, decimal initialValue, int months)
@@ -39,7 +39,7 @@ public class InvestimentSimulation
             decimal taxRate = GetTaxRate(months);
             decimal tax = profit * taxRate;
             var netValue = (finalValue - tax);
-            return (netValue,tax);
+            return (Math.Round(netValue), taxRate);
         }
 
         private decimal GetTaxRate(int months)

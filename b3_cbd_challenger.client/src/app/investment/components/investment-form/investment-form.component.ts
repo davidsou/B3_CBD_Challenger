@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { InvestmentService } from '../../services/investment.service';
 
@@ -6,9 +7,10 @@ import { InvestmentService } from '../../services/investment.service';
 @Component({
   selector: 'app-investment-form',
   standalone: true,  // Indica que este componente é standalone
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './investment-form.component.html',
-  styleUrls: ['./investment-form.component.css']
+  styleUrls: ['./investment-form.component.css'],
+
 })
 export class InvestmentFormComponent {
   investmentForm: FormGroup;

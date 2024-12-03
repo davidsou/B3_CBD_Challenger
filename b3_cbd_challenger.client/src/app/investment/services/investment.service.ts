@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class InvestmentService {
-  private apiUrl = 'https://localhost:7104/CBD'; 
+  private apiUrl = '/CBD'; 
 
   constructor(private http: HttpClient) { }
 
