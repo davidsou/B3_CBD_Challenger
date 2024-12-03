@@ -5,18 +5,18 @@ namespace B3_CBD_Challenger.Application.Features;
 
 public class InvestimentSimulation
 {
-    public record InvestSimulationCommand(decimal Value, int MonthPeriod) : IRequest<InvestmentSimulationResult>;
+    public record InvestSimulationCommand(decimal Value, int MonthPeriod) : IRequest<InvestmentSimulationResponse>;
 
-    public class CommandHandle() : IRequestHandler<InvestSimulationCommand, InvestmentSimulationResult>
+    public class CommandHandle() : IRequestHandler<InvestSimulationCommand, InvestmentSimulationResponse>
     {
         private const decimal CDI = 0.009m; // 0,9% mensal
         private const decimal TB = 1.08m;   // 108% do CDI
-        public async Task<InvestmentSimulationResult> Handle(InvestSimulationCommand request, CancellationToken cancellationToken)
+        public async Task<InvestmentSimulationResponse> Handle(InvestSimulationCommand request, CancellationToken cancellationToken)
         {
             var grossInvestment = CalculateFinalValue(request.Value, request.MonthPeriod);
             var (netInvestment, taxApplied) = ApplyTax(grossInvestment, request.Value, request.MonthPeriod);
 
-            var result = new InvestmentSimulationResult(request.Value,request.MonthPeriod,grossInvestment,netInvestment, taxApplied);
+            var result = new InvestmentSimulationResponse(request.Value,request.MonthPeriod,grossInvestment,netInvestment, taxApplied);
             
             return await Task.FromResult( result);
         }

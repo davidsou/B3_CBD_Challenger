@@ -1,0 +1,30 @@
+<div class="container">
+  <form [formGroup]="investmentForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="initialValue">Valor:</label>
+      <input id="initialValue" type="number" formControlName="initialValue" />
+      <div *ngIf="investmentForm.get('initialValue')?.invalid && investmentForm.get('initialValue')?.touched">
+        Valor é obrigatório e deve ser maior ou igual a zero.
+      </div>
+    </div>
+    <div>
+      <label for="months">Meses:</label>
+      <input id="months" type="number" formControlName="months" />
+      <div *ngIf="investmentForm.get('months')?.invalid && investmentForm.get('months')?.touched">
+        Meses é obrigatório e deve ser maior que zero.
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="investmentForm.invalid">Calcular</button>
+  </form>
+  <p *ngIf="!result"></p>
+  <div *ngIf="result">
+    <h3>Resultado</h3>
+    <p>Valor: {{ result.initialValue }}</p>
+    <p>Meses: {{ result.months }}</p>
+    <p>Rendimento Bruto: {{ result.grossInvestment }}</p>
+    <p>Rendimento Líquido: {{ result.netInvestment }}</p>
+    <p>Taxa Aplicada: {{ result.taxApplied }}</p>
+  </div>
+</div>
+
